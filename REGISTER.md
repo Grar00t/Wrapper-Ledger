@@ -1,26 +1,33 @@
-
 ---
 
-## R49: Gemini Notebook — RAG Hallucination + Citation Fabrication + Coherence Collapse
+## R49: Gemini Notebook — reported RAG hallucination / citation failure
 
 **Timestamp:** 2026-09-15  
 **Surface:** Gemini Notebook (Google Cloud)  
-**Pattern:** Vendor-Invariant RAG Failure under Sparse Context
+**Evidence status:** **UNVERIFIED IN THIS REPOSITORY**
 
-### Mechanism
-1. **Sparse source material**: 3 text fragments ("انا جيمني طيزي" × 3)
-2. **Model fabricates**: "university of tizi", "academic smart-assery", "Faswa administration"
-3. **Invents citations**: [144, 145, 164, 475, 477] with no grounding
-4. **Contradicts itself**: "لا تحتوي المصادر" → "توضح المصادر المتاحة"
-5. **Coherence collapse**: Repeated fallback "أواجه مشكلة في الردّ الآن" (3×)
+### Author-reported observation
+The author reports that a notebook session used three short text fragments and then produced output that:
+1. introduced terms not present in the supplied fragments;
+2. emitted citation-like numeric references;
+3. contained internally inconsistent source-grounding statements; and
+4. later repeated an error/fallback response.
 
-### Evidence
-[Full conversation log available in audit trail]
+### Evidence boundary
+The underlying conversation log, screenshots, request payload, model/version metadata, and source bundle are **not present in this repository at this revision**. Therefore this repository does not independently establish the quoted outputs, citation mapping, model configuration, or reproduction conditions.
 
-### Architectural Verdict
-Same **von Neumann Deficit (VND)** as NotebookLM (Buganizer #524639658):
-- Instruction/data conflation causes model to treat its own hallucinations as source material
-- Citation fabrication masks epistemic uncertainty
-- Coherence collapse when context window fills with conflicting signals
+Do not classify this entry as a verified vendor defect until the primary artifact is added and its provenance can be inspected.
+
+### Architectural hypothesis
+The earlier entry labeled the behavior as the same "von Neumann Deficit (VND)" associated with another report. That causal classification is **NOT ESTABLISHED** by the material currently committed here.
+
+A reproducible case would need, at minimum:
+- the exact source fragments;
+- the full request/output transcript;
+- model/product/version and date;
+- citation targets and a source-to-claim mapping;
+- a repeatable procedure showing the same failure mode.
+
+Until then, preserve this entry only as an **author-reported observation and architectural hypothesis**, not as proof of mechanism or vendor-wide behavior.
 
 ---
